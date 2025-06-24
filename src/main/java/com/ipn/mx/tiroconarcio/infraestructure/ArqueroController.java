@@ -23,7 +23,6 @@ public class ArqueroController {
             return ResponseEntity.status(500).body("Error retrieving archers: " + e.getMessage());
         }
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<?> readById(@PathVariable Long id) {
         try {
@@ -55,7 +54,6 @@ public class ArqueroController {
             return ResponseEntity.status(404).body("Error deleting arquero with id: " + id + " - " + e.getMessage());
         }
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Arquero arquero) {
         try {
