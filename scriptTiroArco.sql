@@ -14,7 +14,7 @@ CREATE TABLE "Arquero" (
 CREATE TABLE "Arco" (
     "idArco" SERIAL PRIMARY KEY,
     "idArquero" INTEGER NOT NULL,
-    "tipo" VARCHAR(|) NOT NULL,
+    "tipo" VARCHAR(50) NOT NULL,
     "marca" VARCHAR(50) NOT NULL,
     "libraje" INTEGER NOT NULL,
     "apertura" DECIMAL(5,2) NOT NULL,

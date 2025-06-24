@@ -1,15 +1,26 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Date;
 
 @Data
 @Entity
 public class Entrenamiento {
     @Id
-    private int idEntrenamiento;
-    private Date fecha;
+    private Long idEntrenamiento;
+
+    @Column(name = "fecha", nullable = false)
+    private LocalDate fecha;
+
+    @ManyToOne
+    @JoinColumn(name = "idArquero", nullable = false)
+    private Arquero arquero;
+
+    @OneToMany(mappedBy = "entrenamiento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Distancia> distancias;
+
 }
