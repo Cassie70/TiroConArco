@@ -60,6 +60,7 @@ public class ArcoController {
             if (arco == null) {
                 return ResponseEntity.badRequest().body("Arco cannot be null");
             }
+            arco.setIdArco(id);
             Arco updatedArco = service.update(arco);
             return ResponseEntity.ok(updatedArco);
         } catch (Exception e) {

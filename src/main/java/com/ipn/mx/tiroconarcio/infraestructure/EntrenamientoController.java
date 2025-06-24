@@ -60,6 +60,7 @@ public class EntrenamientoController {
             if (entrenamiento == null) {
                 return ResponseEntity.badRequest().body("Entrenamiento cannot be null");
             }
+            entrenamiento.setIdEntrenamiento(id);
             Entrenamiento updatedEntrenamiento = service.update(entrenamiento);
             return ResponseEntity.ok(updatedEntrenamiento);
         } catch (Exception e) {

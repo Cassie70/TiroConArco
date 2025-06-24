@@ -60,6 +60,7 @@ public class CompetenciaController {
             if (competencia == null) {
                 return ResponseEntity.badRequest().body("Competencia cannot be null");
             }
+            competencia.setIdCompetencia(id);
             Competencia updatedCompetencia = service.update(competencia);
             return ResponseEntity.ok(updatedCompetencia);
         } catch (Exception e) {

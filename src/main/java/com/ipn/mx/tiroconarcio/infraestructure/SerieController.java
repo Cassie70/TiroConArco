@@ -60,6 +60,7 @@ public class SerieController {
             if (serie == null) {
                 return ResponseEntity.badRequest().body("Serie cannot be null");
             }
+            serie.setIdSerie(id);
             Serie updatedSerie = service.update(serie);
             return ResponseEntity.ok(updatedSerie);
         } catch (Exception e) {

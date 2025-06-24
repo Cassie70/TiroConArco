@@ -60,7 +60,9 @@ public class ArqueroController {
             if (arquero == null) {
                 return ResponseEntity.badRequest().body("Arquero cannot be null");
             }
+            arquero.setIdArquero(id);
             Arquero updatedArquero = service.update(arquero);
+
             return ResponseEntity.ok(updatedArquero);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error updating arquero: " + e.getMessage());

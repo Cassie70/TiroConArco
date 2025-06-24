@@ -60,6 +60,7 @@ public class DistanciaController {
             if (distancia == null) {
                 return ResponseEntity.badRequest().body("Distancia cannot be null");
             }
+            distancia.setIdDistancia(id);
             Distancia updatedDistancia = service.update(distancia);
             return ResponseEntity.ok(updatedDistancia);
         } catch (Exception e) {
