@@ -1,5 +1,6 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -32,6 +33,7 @@ public class Serie implements Serializable {
     private int flecha6;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "idDistancia", nullable = false)
     private Distancia distancia;
 

@@ -37,9 +37,11 @@ public class Arquero implements Serializable {
     private List<Arco> arcos = new ArrayList<>();
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Entrenamiento> entrenamientos = new ArrayList<>();
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Competencia> competencias = new ArrayList<>();
 
 }

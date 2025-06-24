@@ -1,5 +1,7 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,10 +23,12 @@ public class Entrenamiento implements Serializable {
     private LocalDate fecha;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "idArquero", nullable = false)
     private Arquero arquero;
 
     @OneToMany(mappedBy = "entrenamiento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Distancia> distancias = new ArrayList<>();
 
 }

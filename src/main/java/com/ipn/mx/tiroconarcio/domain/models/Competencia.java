@@ -1,5 +1,6 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -37,6 +38,7 @@ public class Competencia implements Serializable {
     private int maximoROI;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "idArquero", nullable = false)
     private Arquero arquero;
 
