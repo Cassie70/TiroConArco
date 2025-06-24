@@ -32,7 +32,7 @@ public class CompetenciaController {
         }
     }
 
-    @GetMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody Competencia competencia) {
         try {
             if (competencia == null) {

@@ -5,6 +5,7 @@ import com.ipn.mx.tiroconarcio.domain.repositories.CompetenciaRepository;
 import com.ipn.mx.tiroconarcio.services.CompetenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class CompetenciaServiceImpl implements CompetenciaService {
         repository = competenciaRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Competencia> readAll() {
         try {
@@ -27,12 +29,14 @@ public class CompetenciaServiceImpl implements CompetenciaService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Competencia readById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Competencia not found with id: " + id));
     }
 
+    @Transactional
     @Override
     public Competencia create(Competencia competencia) {
         if (competencia == null) {
@@ -45,6 +49,7 @@ public class CompetenciaServiceImpl implements CompetenciaService {
         }
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
@@ -57,6 +62,7 @@ public class CompetenciaServiceImpl implements CompetenciaService {
         }
     }
 
+    @Transactional
     @Override
     public Competencia update(Competencia competencia) {
         if (competencia == null) {

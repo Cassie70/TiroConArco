@@ -5,6 +5,7 @@ import com.ipn.mx.tiroconarcio.domain.repositories.EntrenamientoRepository;
 import com.ipn.mx.tiroconarcio.services.EntrenamientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class EntrenamientoServiceImpl implements EntrenamientoService {
         repository = entrenamientoRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Entrenamiento> readAll() {
         try {
@@ -26,12 +28,14 @@ public class EntrenamientoServiceImpl implements EntrenamientoService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Entrenamiento readById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Entrenamiento not found with id: " + id));
     }
 
+    @Transactional
     @Override
     public Entrenamiento create(Entrenamiento entrenamiento) {
         if (entrenamiento == null) {
@@ -44,6 +48,7 @@ public class EntrenamientoServiceImpl implements EntrenamientoService {
         }
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
@@ -56,6 +61,7 @@ public class EntrenamientoServiceImpl implements EntrenamientoService {
         }
     }
 
+    @Transactional
     @Override
     public Entrenamiento update(Entrenamiento entrenamiento) {
         if (entrenamiento == null) {

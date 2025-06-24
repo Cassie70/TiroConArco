@@ -32,7 +32,7 @@ public class ArqueroController {
         }
     }
 
-    @GetMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody Arquero arquero) {
         try {
             if (arquero == null) {

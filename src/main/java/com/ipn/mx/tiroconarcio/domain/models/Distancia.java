@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "Distancia")
 public class Distancia {
     @Id
     private Long idDistancia;

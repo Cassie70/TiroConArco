@@ -5,6 +5,7 @@ import com.ipn.mx.tiroconarcio.domain.repositories.ArcoRepository;
 import com.ipn.mx.tiroconarcio.services.ArcoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class ArcoServiceImpl implements ArcoService {
         repository = arcoRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Arco> readAll() {
         try {
@@ -27,12 +29,14 @@ public class ArcoServiceImpl implements ArcoService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Arco readById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Arco not found with id: " + id));
     }
 
+    @Transactional
     @Override
     public Arco create(Arco arco) {
         if (arco == null) {
@@ -45,6 +49,7 @@ public class ArcoServiceImpl implements ArcoService {
         }
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
@@ -57,6 +62,7 @@ public class ArcoServiceImpl implements ArcoService {
         }
     }
 
+    @Transactional
     @Override
     public Arco update(Arco arco) {
         if (arco == null) {

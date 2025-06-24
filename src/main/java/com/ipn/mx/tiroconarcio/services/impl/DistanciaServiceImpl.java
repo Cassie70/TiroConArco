@@ -5,6 +5,7 @@ import com.ipn.mx.tiroconarcio.domain.repositories.DistanciaRepository;
 import com.ipn.mx.tiroconarcio.services.DistanciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class DistanciaServiceImpl implements DistanciaService {
         repository = distanciaRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Distancia> readAll() {
         try {
@@ -26,12 +28,14 @@ public class DistanciaServiceImpl implements DistanciaService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Distancia readById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Distancia not found with id: " + id));
     }
 
+    @Transactional
     @Override
     public Distancia create(Distancia distancia) {
         if (distancia == null) {
@@ -44,6 +48,7 @@ public class DistanciaServiceImpl implements DistanciaService {
         }
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
@@ -56,6 +61,7 @@ public class DistanciaServiceImpl implements DistanciaService {
         }
     }
 
+    @Transactional
     @Override
     public Distancia update(Distancia distancia) {
         if (distancia == null) {

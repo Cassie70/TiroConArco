@@ -32,7 +32,7 @@ public class ArcoController {
         }
     }
 
-    @GetMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody Arco arco) {
         try {
             if (arco == null) {

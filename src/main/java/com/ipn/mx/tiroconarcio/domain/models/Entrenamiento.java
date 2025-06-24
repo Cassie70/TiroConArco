@@ -9,6 +9,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@Table(name = "Entrenamiento")
 public class Entrenamiento {
     @Id
     private Long idEntrenamiento;

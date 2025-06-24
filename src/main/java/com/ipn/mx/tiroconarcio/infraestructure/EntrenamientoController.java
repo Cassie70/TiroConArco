@@ -32,7 +32,7 @@ public class EntrenamientoController {
         }
     }
 
-    @GetMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody Entrenamiento entrenamiento) {
         try {
             if (entrenamiento == null) {

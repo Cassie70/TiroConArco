@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "Arquero")
 public class Arquero {
     @Id
     private Long idArquero;

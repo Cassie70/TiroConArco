@@ -5,8 +5,10 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "Arco")
 public class Arco {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idArco;
 
     @Column(name = "tipo", nullable = false, length = 50)

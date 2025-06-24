@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "Serie")
 public class Serie {
     @Id
     private Long idSerie;

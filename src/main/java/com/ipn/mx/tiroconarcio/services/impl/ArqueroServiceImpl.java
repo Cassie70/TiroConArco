@@ -5,6 +5,7 @@ import com.ipn.mx.tiroconarcio.domain.repositories.ArqueroRepository;
 import com.ipn.mx.tiroconarcio.services.ArqueroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class ArqueroServiceImpl implements ArqueroService {
         repository = arqueroRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Arquero> readAll() {
         try {
@@ -27,12 +29,14 @@ public class ArqueroServiceImpl implements ArqueroService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Arquero readById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Arquero not found with id: " + id));
     }
 
+    @Transactional
     @Override
     public Arquero create(Arquero arquero) {
         if (arquero == null) {
@@ -45,6 +49,7 @@ public class ArqueroServiceImpl implements ArqueroService {
         }
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
@@ -57,6 +62,7 @@ public class ArqueroServiceImpl implements ArqueroService {
         }
     }
 
+    @Transactional
     @Override
     public Arquero update(Arquero arquero) {
         if (arquero == null) {

@@ -32,7 +32,7 @@ public class SerieController {
         }
     }
 
-    @GetMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody Serie serie) {
         try {
             if (serie == null) {

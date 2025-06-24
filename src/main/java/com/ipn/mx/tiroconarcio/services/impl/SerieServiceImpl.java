@@ -5,6 +5,7 @@ import com.ipn.mx.tiroconarcio.domain.repositories.SerieRepository;
 import com.ipn.mx.tiroconarcio.services.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class SerieServiceImpl implements SerieService {
         repository = serieRepository;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Serie> readAll() {
         try {
@@ -26,12 +28,14 @@ public class SerieServiceImpl implements SerieService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Serie readById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Serie not found with id: " + id));
     }
 
+    @Transactional
     @Override
     public Serie create(Serie serie) {
         if (serie == null) {
@@ -44,6 +48,7 @@ public class SerieServiceImpl implements SerieService {
         }
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (!repository.existsById(id)) {
@@ -56,6 +61,7 @@ public class SerieServiceImpl implements SerieService {
         }
     }
 
+    @Transactional
     @Override
     public Serie update(Serie serie) {
         if (serie == null) {

@@ -32,7 +32,7 @@ public class DistanciaController {
         }
     }
 
-    @GetMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody Distancia distancia) {
         try {
             if (distancia == null) {
