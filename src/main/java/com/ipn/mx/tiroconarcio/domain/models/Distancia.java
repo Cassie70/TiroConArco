@@ -1,5 +1,7 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,10 +20,12 @@ public class Distancia {
     private int metros;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "idEntrenamiento", nullable = false)
     private Entrenamiento entrenamiento;
 
     @OneToMany(mappedBy = "distancia", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Serie> series = new ArrayList<>();
 
 }

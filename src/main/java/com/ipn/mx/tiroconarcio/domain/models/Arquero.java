@@ -1,6 +1,7 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,12 +32,15 @@ public class Arquero {
     private String asociación;
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Arco> arcos = new ArrayList<>();
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Entrenamiento> entrenamientos = new ArrayList<>();
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Competencia> competencias = new ArrayList<>();
 
 }

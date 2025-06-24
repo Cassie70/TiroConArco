@@ -1,5 +1,6 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -27,6 +28,7 @@ public class Arco {
     private float peso;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "idArquero", nullable = false)
     private Arquero arquero;
 
