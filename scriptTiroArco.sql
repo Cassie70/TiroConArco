@@ -1,70 +1,62 @@
-delete database if exists TiroConArco;
-create database TiroConArco;
-use TiroConArco;
+DROP DATABASE IF EXISTS "TiroConArco";
+CREATE DATABASE "TiroConArco";
+\c "TiroConArco";
 
-create table Arquero(
-    idArquero int not null auto_increment,
-    nombre varchar(50) not null,
-    apellido varchar(50) not null,
-    marcaPersonal int,
-    categoria varchar(50) not null,
-    asociacion varchar(100),
-    primary key (idArquero)
+CREATE TABLE "Arquero" (
+    "idArquero" SERIAL PRIMARY KEY,
+    "nombre" VARCHAR(50) NOT NULL,
+    "apellido" VARCHAR(50) NOT NULL,
+    "marcaPersonal" INTEGER,
+    "categoria" VARCHAR(50) NOT NULL,
+    "asociacion" VARCHAR(100)
 );
 
-create table Arco(
-    idArco int not null auto_increment,
-    idArquero int not null,
-    tipo varchar(50) not null,
-    marca varchar(50) not null,
-    libraje int not null,
-    apertura decimal(3,2) not null,
-    peso decimal(3,2) not null,
-    primary key (idArco),
-    foreign key (idArquero) references Arquero(idArquero) on delete cascade
+CREATE TABLE "Arco" (
+    "idArco" SERIAL PRIMARY KEY,
+    "idArquero" INTEGER NOT NULL,
+    "tipo" VARCHAR(|) NOT NULL,
+    "marca" VARCHAR(50) NOT NULL,
+    "libraje" INTEGER NOT NULL,
+    "apertura" DECIMAL(5,2) NOT NULL,
+    "peso" DECIMAL(5,2) NOT NULL,
+    FOREIGN KEY ("idArquero") REFERENCES "Arquero"("idArquero") ON DELETE CASCADE
 );
 
-create table Entrenamiento(
-    idEntrenamiento int not null auto_increment,
-    idArquero int not null,
-    fecha date not null,
-    primary key (idEntrenamiento),
-    foreign key (idArquero) references Arquero(idArquero) on delete cascade
+CREATE TABLE "Entrenamiento" (
+    "idEntrenamiento" SERIAL PRIMARY KEY,
+    "idArquero" INTEGER NOT NULL,
+    "fecha" DATE NOT NULL,
+    FOREIGN KEY ("idArquero") REFERENCES "Arquero"("idArquero") ON DELETE CASCADE
 );
 
-create table Distancia(
-    idDistancia int not null auto_increment,
-    idEntrenamiento int not null,
-    metros int not null,
-    primary key (idDistancia),
-    foreign key (idEntrenamiento) references Entrenamiento(idEntrenamiento) on delete cascade
+CREATE TABLE "Distancia" (
+    "idDistancia" SERIAL PRIMARY KEY,
+    "idEntrenamiento" INTEGER NOT NULL,
+    "metros" INTEGER NOT NULL,
+    FOREIGN KEY ("idEntrenamiento") REFERENCES "Entrenamiento"("idEntrenamiento") ON DELETE CASCADE
 );
 
-create table Serie(
-    idSerie int not null auto_increment,
-    idDistancia int not null,
-    flecha1 int not null,
-    flecha2 int not null,
-    flecha3 int not null,
-    flecha4 int not null,
-    flecha5 int not null,
-    flecha6 int not null,
-    primary key (idSerie),
-    foreign key (idDistancia) references Distancia(idDistancia) on delete cascade
+CREATE TABLE "Serie" (
+    "idSerie" SERIAL PRIMARY KEY,
+    "idDistancia" INTEGER NOT NULL,
+    "flecha1" INTEGER NOT NULL,
+    "flecha2" INTEGER NOT NULL,
+    "flecha3" INTEGER NOT NULL,
+    "flecha4" INTEGER NOT NULL,
+    "flecha5" INTEGER NOT NULL,
+    "flecha6" INTEGER NOT NULL,
+    FOREIGN KEY ("idDistancia") REFERENCES "Distancia"("idDistancia") ON DELETE CASCADE
 );
 
-creat table Competencia(
-    idCompetencia int not null auto_increment,
-    idArquero int not null,
-    nombre varchar(100) not null,
-    fechaInicio date not null,
-    fechaTermino date not null,
-    puntajeClasificatorio int not null,
-    posicionClasificatorio int not null,
-    posicionROI int not null,
-    maximoROI int not null,
-    primary key (idCompetencia),
-    foreign key (idArquero) references Arquero(idArquero) on delete cascade
+CREATE TABLE "Competencia" (
+    "idCompetencia" SERIAL PRIMARY KEY,
+    "idArquero" INTEGER NOT NULL,
+    "nombre" VARCHAR(100) NOT NULL,
+    "fechaInicio" DATE NOT NULL,
+    "fechaTermino" DATE NOT NULL,
+    "puntajeClasificatorio" INTEGER NOT NULL,
+    "posicionClasificatorio" INTEGER NOT NULL,
+    "posicionROI" INTEGER NOT NULL,
+    "maximoROI" INTEGER NOT NULL,
+    FOREIGN KEY ("idArquero") REFERENCES "Arquero"("idArquero") ON DELETE CASCADE
 );
-
-
