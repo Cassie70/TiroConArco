@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -23,6 +24,6 @@ public class Entrenamiento {
     private Arquero arquero;
 
     @OneToMany(mappedBy = "entrenamiento", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Distancia> distancias;
+    private List<Distancia> distancias = new ArrayList<>();
 
 }

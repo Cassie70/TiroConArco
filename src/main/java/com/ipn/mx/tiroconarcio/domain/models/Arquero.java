@@ -3,6 +3,8 @@ package com.ipn.mx.tiroconarcio.domain.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -29,12 +31,12 @@ public class Arquero {
     private String asociación;
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Arco> arcos;
+    private List<Arco> arcos = new ArrayList<>();
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Entrenamiento> entrenamientos;
+    private List<Entrenamiento> entrenamientos = new ArrayList<>();
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Competencia> competencias;
+    private List<Competencia> competencias = new ArrayList<>();
 
 }

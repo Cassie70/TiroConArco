@@ -3,6 +3,7 @@ package com.ipn.mx.tiroconarcio.domain.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,6 +22,6 @@ public class Distancia {
     private Entrenamiento entrenamiento;
 
     @OneToMany(mappedBy = "distancia", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Serie> series;
+    private List<Serie> series = new ArrayList<>();
 
 }
