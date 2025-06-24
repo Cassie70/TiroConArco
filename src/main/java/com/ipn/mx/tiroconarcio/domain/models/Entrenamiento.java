@@ -3,6 +3,7 @@ package com.ipn.mx.tiroconarcio.domain.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "Entrenamiento")
-public class Entrenamiento {
+public class Entrenamiento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEntrenamiento;

@@ -3,10 +3,12 @@ package com.ipn.mx.tiroconarcio.domain.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "Serie")
-public class Serie {
+public class Serie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSerie;

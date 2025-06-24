@@ -1,16 +1,18 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "Arquero")
-public class Arquero {
+public class Arquero implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idArquero;
@@ -31,6 +33,7 @@ public class Arquero {
     private String asociación;
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Arco> arcos = new ArrayList<>();
 
     @OneToMany(mappedBy = "arquero", cascade = CascadeType.ALL, orphanRemoval = true)

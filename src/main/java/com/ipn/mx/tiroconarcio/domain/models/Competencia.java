@@ -3,13 +3,14 @@ package com.ipn.mx.tiroconarcio.domain.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "Competencia")
-public class Competencia {
+public class Competencia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCompetencia;

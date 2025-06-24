@@ -3,10 +3,12 @@ package com.ipn.mx.tiroconarcio.domain.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "Arco")
-public class Arco {
+public class Arco implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idArco;
