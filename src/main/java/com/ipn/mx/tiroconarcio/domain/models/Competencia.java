@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 public class Competencia {
     @Id
-    private Long idCompentecia;
+    private Long idCompetencia;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
