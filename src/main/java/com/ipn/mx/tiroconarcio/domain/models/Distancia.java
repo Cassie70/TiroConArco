@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "Distancia")
 public class Distancia {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDistancia;
 
     @Column(name = "metros", nullable = false)

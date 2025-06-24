@@ -12,6 +12,7 @@ import java.util.Date;
 @Table(name = "Entrenamiento")
 public class Entrenamiento {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEntrenamiento;
 
     @Column(name = "fecha", nullable = false)

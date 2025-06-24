@@ -8,6 +8,7 @@ import lombok.Data;
 @Table(name = "Serie")
 public class Serie {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSerie;
 
     @Column(name = "flecha1", nullable = false)

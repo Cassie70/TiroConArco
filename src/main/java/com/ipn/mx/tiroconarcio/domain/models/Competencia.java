@@ -11,6 +11,7 @@ import java.util.Date;
 @Table(name = "Competencia")
 public class Competencia {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCompetencia;
 
     @Column(name = "nombre", nullable = false, length = 100)
