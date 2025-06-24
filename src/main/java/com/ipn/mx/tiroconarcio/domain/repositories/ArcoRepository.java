@@ -1,4 +1,8 @@
 package com.ipn.mx.tiroconarcio.domain.repositories;
 
-public class ArcoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.ipn.mx.tiroconarcio.domain.models.Arco;
+
+public interface ArcoRepository extends JpaRepository<Arco, Long> {
+
 }

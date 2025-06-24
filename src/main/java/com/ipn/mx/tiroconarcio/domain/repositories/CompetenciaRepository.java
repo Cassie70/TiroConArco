@@ -1,4 +1,7 @@
 package com.ipn.mx.tiroconarcio.domain.repositories;
 
-public class CompetenciaRepository {
+import com.ipn.mx.tiroconarcio.domain.models.Competencia;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CompetenciaRepository extends JpaRepository<Competencia, Long> {
 }
