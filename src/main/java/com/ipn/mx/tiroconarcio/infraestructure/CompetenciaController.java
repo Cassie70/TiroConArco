@@ -2,6 +2,7 @@ package com.ipn.mx.tiroconarcio.infraestructure;
 
 import com.ipn.mx.tiroconarcio.domain.models.Competencia;
 import com.ipn.mx.tiroconarcio.services.CompetenciaService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class CompetenciaController {
 
     private final CompetenciaService service;
+
     public CompetenciaController(CompetenciaService competenciaService) {
-        service = competenciaService;
+        this.service = competenciaService;
     }
 
     @GetMapping("/")
@@ -20,9 +22,10 @@ public class CompetenciaController {
         try {
             return ResponseEntity.ok(service.readAll());
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error retrieving archers: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error retrieving competencias: " + e.getMessage());
         }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> readById(@PathVariable Long id) {
         try {
@@ -33,15 +36,23 @@ public class CompetenciaController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> create(@RequestBody Competencia competencia) {
+    public ResponseEntity<?> create(@Valid @RequestBody Competencia competencia) {
         try {
-            if (competencia == null) {
-                return ResponseEntity.badRequest().body("Competencia cannot be null");
-            }
             Competencia createdCompetencia = service.create(competencia);
             return ResponseEntity.status(201).body(createdCompetencia);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error creating competencia: " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody Competencia competencia) {
+        try {
+            competencia.setIdCompetencia(id);
+            Competencia updatedCompetencia = service.update(competencia);
+            return ResponseEntity.ok(updatedCompetencia);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error updating competencia: " + e.getMessage());
         }
     }
 
@@ -52,19 +63,6 @@ public class CompetenciaController {
             return ResponseEntity.ok("Competencia deleted successfully");
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Error deleting competencia with id: " + id + " - " + e.getMessage());
-        }
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Competencia competencia) {
-        try {
-            if (competencia == null) {
-                return ResponseEntity.badRequest().body("Competencia cannot be null");
-            }
-            competencia.setIdCompetencia(id);
-            Competencia updatedCompetencia = service.update(competencia);
-            return ResponseEntity.ok(updatedCompetencia);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error updating competencia: " + e.getMessage());
         }
     }
 }
