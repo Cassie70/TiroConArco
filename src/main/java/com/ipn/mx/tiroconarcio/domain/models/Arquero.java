@@ -44,4 +44,11 @@ public class Arquero implements Serializable {
     @JsonManagedReference
     private List<Competencia> competencias = new ArrayList<>();
 
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
+
+    @Column(name = "image_type")
+    private String imageType;
+
 }
