@@ -99,7 +99,9 @@ public class ArqueroController {
                     .body(pdfBytes);
 
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(null);
+            return ResponseEntity.status(500).body(
+                    ("Error generating PDF for arquero with id: " + id + " - " + e.getMessage()).getBytes()
+            );
         }
     }
 
