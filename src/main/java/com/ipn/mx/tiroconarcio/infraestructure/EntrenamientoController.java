@@ -5,6 +5,9 @@ import com.ipn.mx.tiroconarcio.services.EntrenamientoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/apiEntrenamientos")
@@ -49,7 +52,10 @@ public class EntrenamientoController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             service.delete(id);
-            return ResponseEntity.ok("Entrenamiento deleted successfully");
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Entrenamiento deleted successfully");
+            response.put("id", id.toString());
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Error deleting entrenamiento with id: " + id + " - " + e.getMessage());
         }

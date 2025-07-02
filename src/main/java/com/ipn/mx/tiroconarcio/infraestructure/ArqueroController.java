@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
+import java.util.Map;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -57,7 +58,8 @@ public class ArqueroController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             service.delete(id);
-            return ResponseEntity.ok("Arquero deleted successfully");
+            Map<String, String> response = Map.of("message", "Arquero deleted successfully", "id", id.toString());
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Error deleting arquero with id: " + id + " - " + e.getMessage());
         }

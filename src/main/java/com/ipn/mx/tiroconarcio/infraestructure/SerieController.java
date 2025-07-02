@@ -5,6 +5,8 @@ import com.ipn.mx.tiroconarcio.services.SerieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/apiSeries")
@@ -49,7 +51,8 @@ public class SerieController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             service.delete(id);
-            return ResponseEntity.ok("Serie deleted successfully");
+            Map<String, String> response = Map.of("message", "Serie deleted successfully", "id", id.toString());
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Error deleting serie with id: " + id + " - " + e.getMessage());
         }

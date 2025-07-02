@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/apiCompetencias")
@@ -60,7 +62,8 @@ public class CompetenciaController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             service.delete(id);
-            return ResponseEntity.ok("Competencia deleted successfully");
+            Map<String, String> response = Map.of("message", "Competencia deleted successfully", "id", id.toString());
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Error deleting competencia with id: " + id + " - " + e.getMessage());
         }

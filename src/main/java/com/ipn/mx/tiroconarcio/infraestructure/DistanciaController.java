@@ -5,6 +5,8 @@ import com.ipn.mx.tiroconarcio.services.DistanciaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api/apiDistancias")
@@ -49,7 +51,8 @@ public class DistanciaController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             service.delete(id);
-            return ResponseEntity.ok("Distancia deleted successfully");
+            Map<String, String> response = Map.of("message", "Distancia deleted successfully", "id", id.toString());
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(404).body("Error deleting distancia with id: " + id + " - " + e.getMessage());
         }
