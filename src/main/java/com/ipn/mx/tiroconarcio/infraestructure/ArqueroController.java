@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -56,6 +57,8 @@ public class ArqueroController {
             arquero.setMarcaPersonal(request.getMarcaPersonal());
             arquero.setCategoria(request.getCategoria());
             arquero.setAsociación(request.getAsociacion());
+            arquero.setImage(null);
+            arquero.setImageType(null);
 
             Arquero createdArquero = service.create(arquero);
             return ResponseEntity.status(201).body(createdArquero);
@@ -134,22 +137,29 @@ public class ArqueroController {
     public ResponseEntity<?> uploadImage(@PathVariable Long id, @RequestParam("image") MultipartFile image) {
         try {
             Arquero arquero = service.readById(id);
+            Map<String,String> response = new HashMap<>();
 
             if (image == null || image.isEmpty()) {
-                return ResponseEntity.badRequest().body("No se proporcionó una imagen.");
+                response.put("message", "Arquero image cannot be empty");
+                return ResponseEntity.badRequest().body(response);
             }
 
             if (!Objects.requireNonNull(image.getContentType()).startsWith("image/")) {
-                return ResponseEntity.badRequest().body("El archivo no es un formato de imagen permitido.");
+                response.put("message", "Arquero image is not an image");
+                return ResponseEntity.badRequest().body(response);
             }
 
             arquero.setImage(image.getBytes());
             arquero.setImageType(image.getContentType());
             service.update(arquero);
 
-            return ResponseEntity.ok("Imagen cargada correctamente para el arquero con id: " + id);
+            response.put("message", "Image uploaded successfully for arquero with id: " + id);
+            response.put("id", id.toString());
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error al subir imagen: " + e.getMessage());
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Error uploading image for arquero with id: " + id + " - " + e.getMessage());
+            return ResponseEntity.status(500).body(response);
         }
     }
 
