@@ -1,6 +1,7 @@
 package com.ipn.mx.tiroconarcio.infraestructure;
 
 import com.ipn.mx.tiroconarcio.domain.models.Arquero;
+import com.ipn.mx.tiroconarcio.domain.models.ArqueroDTO;
 import com.ipn.mx.tiroconarcio.services.ArqueroService;
 import com.ipn.mx.tiroconarcio.services.PdfService;
 import org.springframework.http.HttpHeaders;
@@ -42,15 +43,29 @@ public class ArqueroController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> create(@RequestBody Arquero arquero) {
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ArqueroDTO request) {
         try {
-            if (arquero == null) {
+            if (request == null) {
                 return ResponseEntity.badRequest().body("Arquero cannot be null");
             }
-            Arquero createdArquero = service.create(arquero);
-            return ResponseEntity.status(201).body(createdArquero);
+
+            Arquero arquero = service.readById(id);
+            if (arquero == null) {
+                return ResponseEntity.status(404).body("Arquero with id " + id + " not found");
+            }
+
+            arquero.setNombre(request.getNombre());
+            arquero.setApellido(request.getApellido());
+            arquero.setMarcaPersonal(request.getMarcaPersonal());
+            arquero.setCategoria(request.getCategoria());
+            arquero.setAsociación(request.getAsociacion());
+
+            Arquero updatedArquero = service.update(arquero);
+
+            return ResponseEntity.ok(updatedArquero);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error creating arquero: " + e.getMessage());
+            return ResponseEntity.status(500).body("Error updating arquero: " + e.getMessage());
         }
     }
 
