@@ -1,6 +1,7 @@
 package com.ipn.mx.tiroconarcio.domain.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -46,9 +47,11 @@ public class Arquero implements Serializable {
 
     @Lob
     @Column(name = "image", columnDefinition = "BYTEA")
+    @JsonIgnore
     private byte[] image;
 
     @Column(name = "image_type")
+    @JsonIgnore
     private String imageType;
 
 }
