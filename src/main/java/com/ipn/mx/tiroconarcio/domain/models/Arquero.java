@@ -46,6 +46,7 @@ public class Arquero implements Serializable {
     private List<Competencia> competencias = new ArrayList<>();
 
     @Lob
+    @JsonIgnore
     @Column(name = "image", columnDefinition = "BYTEA")
     private byte[] image;
 

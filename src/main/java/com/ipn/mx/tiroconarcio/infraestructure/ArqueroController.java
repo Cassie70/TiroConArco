@@ -1,5 +1,6 @@
 package com.ipn.mx.tiroconarcio.infraestructure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ipn.mx.tiroconarcio.domain.models.Arquero;
 import com.ipn.mx.tiroconarcio.domain.models.ArqueroDTO;
 import com.ipn.mx.tiroconarcio.services.ArqueroService;
