@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.util.Map;
+import java.util.Objects;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -43,6 +44,37 @@ public class ArqueroController {
     }
 
     @PostMapping("/")
+    public ResponseEntity<?> create(@RequestBody ArqueroDTO request) {
+        try {
+            if (request == null) {
+                return ResponseEntity.badRequest().body("Arquero cannot be null");
+            }
+            Arquero arquero = new Arquero();
+            arquero.setNombre(request.getNombre());
+            arquero.setApellido(request.getApellido());
+            arquero.setMarcaPersonal(request.getMarcaPersonal());
+            arquero.setCategoria(request.getCategoria());
+            arquero.setAsociación(request.getAsociacion());
+
+            Arquero createdArquero = service.create(arquero);
+            return ResponseEntity.status(201).body(createdArquero);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error creating arquero: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        try {
+            service.delete(id);
+            Map<String, String> response = Map.of("message", "Arquero deleted successfully", "id", id.toString());
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(404).body("Error deleting arquero with id: " + id + " - " + e.getMessage());
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ArqueroDTO request) {
         try {
@@ -61,31 +93,6 @@ public class ArqueroController {
             arquero.setCategoria(request.getCategoria());
             arquero.setAsociación(request.getAsociacion());
 
-            Arquero updatedArquero = service.update(arquero);
-
-            return ResponseEntity.ok(updatedArquero);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error updating arquero: " + e.getMessage());
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            service.delete(id);
-            Map<String, String> response = Map.of("message", "Arquero deleted successfully", "id", id.toString());
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            return ResponseEntity.status(404).body("Error deleting arquero with id: " + id + " - " + e.getMessage());
-        }
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Arquero arquero) {
-        try {
-            if (arquero == null) {
-                return ResponseEntity.badRequest().body("Arquero cannot be null");
-            }
-            arquero.setIdArquero(id);
             Arquero updatedArquero = service.update(arquero);
 
             return ResponseEntity.ok(updatedArquero);
@@ -131,7 +138,7 @@ public class ArqueroController {
                 return ResponseEntity.badRequest().body("No se proporcionó una imagen.");
             }
 
-            if (!image.getContentType().startsWith("image/")) {
+            if (!Objects.requireNonNull(image.getContentType()).startsWith("image/")) {
                 return ResponseEntity.badRequest().body("El archivo no es un formato de imagen permitido.");
             }
 
