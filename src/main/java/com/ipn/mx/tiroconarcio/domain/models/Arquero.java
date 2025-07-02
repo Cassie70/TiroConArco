@@ -49,6 +49,7 @@ public class Arquero implements Serializable {
     @Column(name = "image", columnDefinition = "BYTEA")
     private byte[] image;
 
+    @JsonIgnore
     @Column(name = "image_type")
     private String imageType;
 
